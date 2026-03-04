@@ -9,19 +9,19 @@ namespace Models
         [Key]
         public long StudentID {get; set;}
         
-        [Required]
-        public string FirstName {get; set;}
+        [MaxLength(50)]
+        public required string FirstName {get; set;}
         
+        [MaxLength(50)]
         public string? MiddleName {get; set;}
 
-        [Required]
-        public string LastName {get; set;}
+        [MaxLength(50)]
+        public required string LastName {get; set;}
 
-        [Required]
-        public string Email {get; set;}
-
-        [Required]
-        public DateOnly DateOfBirth {get; set;}
+        [MaxLength(100)]
+        public required string Email {get; set;}
+        
+        public required DateOnly DateOfBirth {get; set;}
         public int DepartmentID {get; set;}
 
     }
