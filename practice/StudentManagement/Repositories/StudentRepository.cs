@@ -5,22 +5,30 @@ using StudentManagement.Data;
 namespace StudentManagement.Repositories
 {
     public class StudentRepository : IStudentRepository
-    {
+    {   
+        //Context
         private readonly StudentContext _context;
 
+        //Dependency Injection (DI)
         public StudentRepository(StudentContext context)
         {
             _context = context;
         }
 
+        
         public async Task<IEnumerable<Student>> GetAllStudentsAsync()
         {
             return await _context.Students.ToListAsync();
         }
 
-        public async Task<Student?> GetStudentByIdAsync(long id)
+        public async Task<Student?> GetStudentAsync(long studentId)
         {
-            return await _context.Students.FindAsync(id);
+            return await _context.Students.FindAsync(studentId);
+        }
+
+        public async Task<bool> EmailExistsAsync(string email)
+        {
+            return await _context.Students.AnyAsync(s => s.Email == email);
         }
 
         public async Task AddStudentAsync(Student student)
@@ -43,11 +51,6 @@ namespace StudentManagement.Repositories
                 _context.Students.Remove(student);
                 await _context.SaveChangesAsync();
             }
-        }
-
-        public Task<Student?> GetStudentAsync(long studentId)
-        {
-            throw new NotImplementedException();
         }
     }
 }

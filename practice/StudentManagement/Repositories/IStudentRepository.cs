@@ -10,11 +10,16 @@ namespace StudentManagement.Repositories
         //Get a student by ID(? => nullable)
         Task<Student?> GetStudentAsync(long studentId);
 
-        //Create a new Student 
+        Task<bool> EmailExistsAsync(string email);
+
+        //Create a new Student  
         Task AddStudentAsync(Student student);
 
+        //Update
         Task UpdateStudentAsync(Student student);
 
+
+        //Delete
         Task DeleteStudentAsync(long studentId);
     }
 }
